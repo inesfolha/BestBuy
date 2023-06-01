@@ -1,12 +1,5 @@
-from products import Product
+from products import Product, NonStockedProduct, LimitedProduct
 from store import Store
-
-product_list = [Product("MacBook Air M2", price=1450, quantity=100),
-                Product("Bose QuietComfort Earbuds", price=250, quantity=500),
-                Product("Google Pixel 7", price=500, quantity=250)
-                ]
-
-best_buy = Store(product_list)
 
 
 def start(store):
@@ -95,26 +88,35 @@ def make_order(store):
         for index, product in enumerate(products):
             print(f' {index + 1} {product.show()}')
     while True:
-        product_num = input("Enter the product number (or press Enter to finish): ")
-        if not product_num:
-            break
-
         try:
+            product_num = input("Enter the product number (or press Enter to finish): ")
+            if not product_num:
+                break
             product_num = int(product_num)
             if 1 <= product_num <= len(products):
                 quantity = int(input(f"Enter quantity for '{products[product_num - 1].name}': "))
                 shopping_list.append((products[product_num - 1], quantity))
+
             else:
                 print("Invalid product number.")
-        except ValueError:
-            print("Invalid input. Please enter a valid product number.")
+        except ValueError as e:
+            print("An error occurred:", str(e))
 
     if shopping_list:
-        store.order(shopping_list)
+        total_price = store.order(shopping_list)
+        print(f"Order submitted! Total: {total_price} EUR.")
 
 
 def main():
     """ Main function to start the program. """
+    product_list = [Product("MacBook Air M2", price=1450, quantity=100),
+                    Product("Bose QuietComfort Earbuds", price=250, quantity=500),
+                    Product("Google Pixel 7", price=500, quantity=250),
+                    NonStockedProduct("Windows License", price=125),
+                    LimitedProduct("Shipping", price=10, quantity=250, limit=1)
+                    ]
+
+    best_buy = Store(product_list)
     start(best_buy)
 
 

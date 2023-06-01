@@ -81,20 +81,12 @@ class Store:
             - Order will not be fully fulfilled if stock is insufficient.
         """
         total_price = 0.0
-        insufficient_stock = []
-
         for product, quantity in shopping_list:
             if product in self.products:
-                if product.quantity >= quantity:
-                    total_price += product.price * quantity
-                    product.quantity -= quantity
+                if product.quantity <= quantity:
+                    print(f"Insufficient stock for product {product.name}")
+                    print(product.show())
                 else:
-                    insufficient_stock.append(product)
-
-        if insufficient_stock:
-            print("Insufficient stock for the following products:")
-            for product in insufficient_stock:
-                print(f"Product: {product.name}, Available Quantity: {product.quantity}")
-        else:
-            print(f"Order submitted! Total: {total_price} EUR.")
+                    product.buy(quantity)
+                    total_price += product.price * quantity
         return total_price

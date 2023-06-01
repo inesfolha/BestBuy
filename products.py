@@ -1,12 +1,12 @@
 class Product:
     def __init__(self, name, price, quantity):
         """
-                   Initialize a Product object.
+            Initialize a Product object.
 
-                   Args:
-                       name (str): The name of the product.
-                       price (float): The price of the product.
-                       quantity (int): The quantity of the product.
+            Args:
+                name (str): The name of the product.
+                price (float): The price of the product.
+                quantity (int): The quantity of the product.
             """
 
         if not name or price < 0 or quantity < 0:
@@ -58,7 +58,51 @@ class Product:
         if not self.active:
             print("Product is not active.")
         if quantity_requested > self.quantity:
-            raise Exception("Insufficient quantity available.")
+            raise ValueError("Insufficient quantity available.")
+        total_price = float(self.price * quantity_requested)
+        self.set_quantity(self.quantity - quantity_requested)
+        return total_price
+
+
+
+
+class NonStockedProduct(Product):
+    def __init__(self, name, price):
+        super().__init__(name, price, 0)
+        self.active = True
+
+    def show(self):
+        """Gets a string representation of the product."""
+        return f"{self.name}, Price: {self.price}"
+
+    def buy(self, quantity_requested):
+        """
+        Buy a specified quantity of the product.
+        Returns the total price of the purchase.
+        """
+        if not self.active:
+            print("Product is not active.")
+        total_price = float(self.price * quantity_requested)
+        return total_price
+
+class LimitedProduct(Product):
+    def __init__(self, name, price, quantity, limit):
+        super().__init__(name, price, quantity)
+        self.limit = limit
+    def show(self):
+        """Gets a string representation of the product."""
+        return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Limit per order: {self.limit}"
+
+    def buy(self, quantity_requested):
+        """
+        Buy a specified quantity of the product.
+        Returns the total price of the purchase.
+        """
+        if not self.active:
+            print("Product is not active.")
+        if quantity_requested > self.quantity or quantity_requested > self.limit:
+            raise ValueError("Insufficient quantity available.")
+
         total_price = float(self.price * quantity_requested)
         self.set_quantity(self.quantity - quantity_requested)
         return total_price
