@@ -1,6 +1,5 @@
 from products import Product
 
-
 class Store:
     def __init__(self, product):
         """ Initializes a Store object.
