@@ -90,3 +90,25 @@ class NonStockedProduct(Product):
         total_price = float(self.price * quantity_requested)
         return total_price
 
+class LimitedProduct(Product):
+    def __init__(self, name, price, quantity, limit):
+        super().__init__(name, price, quantity)
+        self.limit = limit
+
+    def show(self):
+        """Gets a string representation of the product."""
+        return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Limit per order: {self.limit}"
+
+    def buy(self, quantity_requested):
+        """
+        Buy a specified quantity of the product.
+        Returns the total price of the purchase.
+        """
+        if not self.active:
+            print("Product is not active.")
+        if quantity_requested > self.quantity or quantity_requested > self.limit:
+            raise ValueError(f"{self.name} is limited to {self.limit} per order")
+
+        total_price = float(self.price * quantity_requested)
+        self.set_quantity(self.quantity - quantity_requested)
+        return total_price

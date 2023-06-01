@@ -1,4 +1,4 @@
-from products import Product, NonStockedProduct
+from products import Product, NonStockedProduct, LimitedProduct
 
 
 class Store:
@@ -81,12 +81,17 @@ class Store:
             - Order will not be fully fulfilled if stock is insufficient.
         """
         total_price = 0.0
-        for product, quantity in shopping_list:
+        for product, requested_quantity in shopping_list:
             if product in self.products:
-                if not isinstance(product, NonStockedProduct) and product.quantity <= quantity:
-                    print(f"Insufficient stock for product {product.name}")
-                    print(product.show())
+
+                if isinstance(product, LimitedProduct) and product.limit <= requested_quantity <= product.quantity:
+                    product.buy(requested_quantity)
+                    total_price += product.price * requested_quantity
                 else:
-                    product.buy(quantity)
-                    total_price += product.price * quantity
+                    if not isinstance(product, NonStockedProduct) and product.quantity <= requested_quantity:
+                        print(f"Insufficient stock for product {product.name}")
+                        print(product.show())
+                    else:
+                        product.buy(requested_quantity)
+                        total_price += product.price * requested_quantity
         return total_price
