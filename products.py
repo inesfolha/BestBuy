@@ -26,7 +26,11 @@ class Product:
             Returns True if the quantity is successfully set and greater than 0, False otherwise.
         """
         self.quantity = quantity
-        return self.quantity > 0
+        if self.quantity > 0:
+            self.active = True
+        else:
+            self.active = False
+        return self.quantity
 
     def is_active(self):
         """Checks if the product is active."""
