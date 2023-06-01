@@ -58,8 +58,7 @@ class Product:
         if not self.active:
             print("Product is not active.")
         if quantity_requested > self.quantity:
-            print("Insufficient quantity available.")
+            raise Exception("Insufficient quantity available.")
         total_price = float(self.price * quantity_requested)
         self.set_quantity(self.quantity - quantity_requested)
         return total_price
-

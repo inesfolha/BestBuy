@@ -1,6 +1,7 @@
 import pytest
 from products import Product
 
+
 def test_1():
     """Test that creating a normal product works."""
     product_1 = Product("phone", 10, 100)
@@ -8,6 +9,7 @@ def test_1():
     assert product_1.price == 10
     assert product_1.quantity == 100
     assert product_1.active == True
+
 
 def test_2():
     """Test that creating a product with invalid details (empty name, negative price) invokes an exception."""
@@ -21,10 +23,16 @@ def test_3():
     product_3.set_quantity(0)
     assert product_3.is_active() == False
 
+
 def test_4():
     """Test that product purchase modifies the quantity and returns the right output."""
-    pass
+    product_4 = Product("Keyboard", 50, 130)
+    product_4.buy(10)
+    assert product_4.get_quantity() == 120
+
 
 def test_5():
     """Test that buying a larger quantity than exists invokes exception."""
-    pass
+    product_4 = Product("Mouse", 30, 100)
+    with pytest.raises(Exception):
+        product_4.buy(131)
