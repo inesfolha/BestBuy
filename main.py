@@ -1,4 +1,4 @@
-from products import Product
+from products import Product, NonStockedProduct
 from store import Store
 
 
@@ -95,7 +95,8 @@ def make_order(store):
             product_num = int(product_num)
             if 1 <= product_num <= len(products):
                 quantity = int(input(f"Enter quantity for '{products[product_num - 1].name}': "))
-                if products[product_num - 1].quantity < quantity:
+                if not isinstance(products[product_num - 1], NonStockedProduct) \
+                        and products[product_num - 1].quantity <= quantity:
                     print(f"Insufficient stock for product {products[product_num - 1].name}")
                     continue
                 shopping_list.append((products[product_num - 1], quantity))
@@ -114,9 +115,9 @@ def main():
     """ Main function to start the program. """
     product_list = [Product("MacBook Air M2", price=1450, quantity=100),
                     Product("Bose QuietComfort Earbuds", price=250, quantity=500),
-                    Product("Google Pixel 7", price=500, quantity=250)]
-    # NonStockedProduct("Windows License", price=125),
-    # LimitedProduct("Shipping", price=10, quantity=250, limit=1)
+                    Product("Google Pixel 7", price=500, quantity=250),
+                    NonStockedProduct("Windows License", price=125),]
+                    #LimitedProduct("Shipping", price=10, quantity=250, limit=1) ]
 
     best_buy = Store(product_list)
     start(best_buy)

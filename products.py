@@ -64,3 +64,29 @@ class Product:
         return total_price
 
 
+class NonStockedProduct(Product):
+    def __init__(self, name, price):
+        super().__init__(name, price, 0)
+        self.active = True
+
+    def show(self):
+        """Gets a string representation of the product."""
+        return f"{self.name}, Price: {self.price}"
+
+    def set_quantity(self, quantity):
+        """
+        Sets the available quantity of a non-stocked product.
+        This method is overridden to prevent updating the quantity value.
+        """
+        pass
+
+    def buy(self, quantity_requested):
+        """
+        Buy a specified quantity of the product.
+        Returns the total price of the purchase.
+        """
+        if not self.active:
+            print("Product is not active.")
+        total_price = float(self.price * quantity_requested)
+        return total_price
+

@@ -1,4 +1,5 @@
-from products import Product
+from products import Product, NonStockedProduct
+
 
 class Store:
     def __init__(self, product):
@@ -82,7 +83,7 @@ class Store:
         total_price = 0.0
         for product, quantity in shopping_list:
             if product in self.products:
-                if product.quantity <= quantity:
+                if not isinstance(product, NonStockedProduct) and product.quantity <= quantity:
                     print(f"Insufficient stock for product {product.name}")
                     print(product.show())
                 else:
