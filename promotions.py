@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 
 
 class Promotion():
@@ -35,9 +35,9 @@ class SecondHalfPrice(Promotion):
     def apply_promotion(self, product, quantity):
         if quantity <= 0:
             return 0.0
-        elif quantity <2:
+        elif quantity < 2:
             total_price = product.price * quantity
         else:
             remaining_quantity = quantity % 2
-            total_price = product.price * quantity - (product.price/2) + remaining_quantity * product.price
+            total_price = product.price * quantity - (product.price / 2) + remaining_quantity * product.price
         return total_price

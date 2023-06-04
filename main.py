@@ -1,6 +1,6 @@
 from products import Product, NonStockedProduct, LimitedProduct
+from promotions import SecondHalfPrice, ThirdOneFree, PercentDiscount
 from store import Store
-from promotions import Promotion, SecondHalfPrice, ThirdOneFree, PercentDiscount
 
 
 def start(store):

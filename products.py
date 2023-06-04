@@ -1,4 +1,3 @@
-from promotions import Promotion, SecondHalfPrice, PercentDiscount, ThirdOneFree
 class Product:
     def __init__(self, name, price, quantity):
         """
@@ -24,7 +23,6 @@ class Product:
     def set_promotion(self, promotion):
         self.promotion = promotion
         return self.promotion
-
 
     def get_quantity(self):
         """Gets the quantity of the product."""
@@ -117,6 +115,7 @@ class NonStockedProduct(Product):
             total_price = float(self.price * quantity_requested)
 
         return total_price
+
 
 class LimitedProduct(Product):
     def __init__(self, name, price, quantity, limit):
