@@ -1,7 +1,7 @@
 from abc import abstractmethod
 
 
-class Promotion():
+class Promotion:
     @abstractmethod
     def apply_promotion(self, product, quantity):
         pass
