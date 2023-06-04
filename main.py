@@ -55,7 +55,7 @@ def list_products(store):
     products = store.get_all_products()
     if products:
         for product in products:
-            print(product.show())
+            print(product)
     else:
         print("No active products in store.")
 
@@ -87,7 +87,7 @@ def make_order(store):
     if products:
         print("Available products:")
         for index, product in enumerate(products):
-            print(f' {index + 1} {product.show()}')
+            print(f' {index + 1} {product}')
     while True:
         try:
             product_num = input("Enter the product number (or press Enter to finish): ")
@@ -104,7 +104,8 @@ def make_order(store):
 
                 if not isinstance(products[product_num - 1], NonStockedProduct) \
                         and products[product_num - 1].quantity <= quantity:
-                    print(f"Insufficient stock for product {products[product_num - 1].name}")
+                    print(f"Insufficient stock for product {products[product_num - 1].name}, "
+                          f" Available: {products[product_num - 1].quantity}")
                     continue
                 shopping_list.append((products[product_num - 1], quantity))
                 print(f"Item {products[product_num - 1].name} added to the basket")

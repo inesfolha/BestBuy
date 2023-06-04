@@ -90,7 +90,7 @@ class Store:
                 else:
                     if not isinstance(product, NonStockedProduct) and product.quantity <= requested_quantity:
                         print(f"Insufficient stock for product {product.name}")
-                        print(product.show())
+                        print(product)
                     else:
                         total_price += product.buy(requested_quantity)
 

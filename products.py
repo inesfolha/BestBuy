@@ -56,7 +56,7 @@ class Product:
         self.active = False
         return self.active
 
-    def show(self):
+    def __str__(self):
         """Gets a string representation of the product."""
         if self.promotion:
             return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, " \
@@ -89,7 +89,7 @@ class NonStockedProduct(Product):
         super().__init__(name, price, 0)
         self.active = True
 
-    def show(self):
+    def __str__(self):
         """Gets a string representation of the product."""
         if self.promotion:
             return f"{self.name}, Price: {self.price}, Promotion: {self.promotion.__class__.__name__}"
@@ -123,7 +123,7 @@ class LimitedProduct(Product):
         super().__init__(name, price, quantity)
         self.limit = limit
 
-    def show(self):
+    def __str__(self):
         """Gets a string representation of the product."""
         if self.promotion:
             return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Limit per order: {self.limit}" \
