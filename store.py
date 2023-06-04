@@ -9,6 +9,9 @@ class Store:
 
         self.products = product
 
+    def __contains__(self, product):
+        return product in self.products
+
     def add_product(self, product):
         """
         Add a product to the store.
