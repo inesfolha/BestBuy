@@ -1,3 +1,4 @@
+from promotions import Promotion, SecondHalfPrice, PercentDiscount, ThirdOneFree
 class Product:
     def __init__(self, name, price, quantity):
         """
@@ -15,6 +16,15 @@ class Product:
         self.price = price
         self.quantity = quantity
         self.active = True
+        self.promotion = None
+
+    def get_promotion(self):
+        return self.promotion
+
+    def set_promotion(self, promotion):
+        self.promotion = promotion
+        return self.promotion
+
 
     def get_quantity(self):
         """Gets the quantity of the product."""
@@ -48,7 +58,11 @@ class Product:
 
     def show(self):
         """Gets a string representation of the product."""
-        return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}"
+        if self.promotion:
+            return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, " \
+                   f"Promotion: {self.promotion.__class__.__name__}"
+        else:
+            return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}"
 
     def buy(self, quantity_requested):
         """
@@ -57,9 +71,15 @@ class Product:
         """
         if not self.active:
             print("Product is not active.")
+
         if quantity_requested > self.quantity:
             raise ValueError("Insufficient quantity available.")
-        total_price = float(self.price * quantity_requested)
+
+        if self.promotion:
+            total_price = float(self.promotion.apply_promotion(self, quantity_requested))
+        else:
+            total_price = float(self.price * quantity_requested)
+
         self.set_quantity(self.quantity - quantity_requested)
         return total_price
 
@@ -71,7 +91,10 @@ class NonStockedProduct(Product):
 
     def show(self):
         """Gets a string representation of the product."""
-        return f"{self.name}, Price: {self.price}"
+        if self.promotion:
+            return f"{self.name}, Price: {self.price}, Promotion: {self.promotion.__class__.__name__}"
+        else:
+            return f"{self.name}, Price: {self.price}"
 
     def set_quantity(self, quantity):
         """
@@ -87,7 +110,12 @@ class NonStockedProduct(Product):
         """
         if not self.active:
             print("Product is not active.")
-        total_price = float(self.price * quantity_requested)
+
+        if self.promotion:
+            total_price = float(self.promotion.apply_promotion(self, quantity_requested))
+        else:
+            total_price = float(self.price * quantity_requested)
+
         return total_price
 
 class LimitedProduct(Product):
@@ -97,7 +125,11 @@ class LimitedProduct(Product):
 
     def show(self):
         """Gets a string representation of the product."""
-        return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Limit per order: {self.limit}"
+        if self.promotion:
+            return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Limit per order: {self.limit}" \
+                   f"Promotion: {self.promotion.__class__.__name__}"
+        else:
+            return f"{self.name}, Price: {self.price}, Quantity: {self.quantity}, Limit per order: {self.limit}"
 
     def buy(self, quantity_requested):
         """
@@ -106,9 +138,14 @@ class LimitedProduct(Product):
         """
         if not self.active:
             print("Product is not active.")
+
         if quantity_requested > self.quantity or quantity_requested > self.limit:
             raise ValueError(f"{self.name} is limited to {self.limit} per order")
 
-        total_price = float(self.price * quantity_requested)
+        if self.promotion:
+            total_price = float(self.promotion.apply_promotion(self, quantity_requested))
+        else:
+            total_price = float(self.price * quantity_requested)
+
         self.set_quantity(self.quantity - quantity_requested)
         return total_price
