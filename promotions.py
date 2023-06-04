@@ -26,7 +26,7 @@ class PercentDiscount(Promotion):
         if quantity <= 0:
             return 0.0
         total_price = product.price * quantity
-        discount_amount = total_price * self.discount_percentage
+        discount_amount = total_price * self.discount_percentage / 100
         discounted_price = total_price - discount_amount
         return discounted_price
 

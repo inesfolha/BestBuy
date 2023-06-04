@@ -1,5 +1,6 @@
 from products import Product, NonStockedProduct, LimitedProduct
 from store import Store
+from promotions import Promotion, SecondHalfPrice, ThirdOneFree, PercentDiscount
 
 
 def start(store):
@@ -98,7 +99,8 @@ def make_order(store):
 
                 if isinstance(products[product_num - 1], LimitedProduct) and \
                         products[product_num - 1].limit > quantity:
-                    raise ValueError(f"{products[product_num - 1].name}is limited to {products[product_num - 1].limit} per order")
+                    raise ValueError(
+                        f"{products[product_num - 1].name}is limited to {products[product_num - 1].limit} per order")
 
                 if not isinstance(products[product_num - 1], NonStockedProduct) \
                         and products[product_num - 1].quantity <= quantity:
@@ -127,6 +129,16 @@ def main():
                     Product("Google Pixel 7", price=500, quantity=250),
                     NonStockedProduct("Windows License", price=125),
                     LimitedProduct("Shipping", price=10, quantity=250, limit=1)]
+
+    # Create promotion catalog
+    second_half_price = SecondHalfPrice()
+    third_one_free = ThirdOneFree()
+    thirty_percent = PercentDiscount(30)
+
+    # Add promotions to products
+    product_list[0].set_promotion(second_half_price)
+    product_list[1].set_promotion(third_one_free)
+    product_list[3].set_promotion(thirty_percent)
 
     best_buy = Store(product_list)
     start(best_buy)

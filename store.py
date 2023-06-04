@@ -92,6 +92,6 @@ class Store:
                         print(f"Insufficient stock for product {product.name}")
                         print(product.show())
                     else:
-                        product.buy(requested_quantity)
-                        total_price += product.price * requested_quantity
+                        total_price += product.buy(requested_quantity)
+
         return total_price
