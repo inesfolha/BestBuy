@@ -1,20 +1,31 @@
 # BestBuy
 
-## This project is meant to work as a simple engine for a fictional tech shop called BestBuy.
+## Table of Contents
+1. [Introduction](#introduction)
+2. [Objects](#objects)
+   - [Product](#product)
+   - [Promotion](#promotion)
+   - [Store](#store)
+3. [Installation](#installation)
+   - [Prerequisites](#prerequisites)
+   - [Installation Steps](#installation-steps)
+4. [Usage](#usage)
+5. [Limitations](#limitations)
 
-This project was built as a training exercise after my first deep dive into OOP programming, Source control and Testing.
+## Introduction
+Welcome to BestBuy, a simple engine for a fictional tech shop. 
 
-Using this program, you can list products and simulate placing an order, via the command line user interface. 
+This project was developed as a training exercise for Object-Oriented Programming, Source Control, and Testing. BestBuy allows you to list products and simulate placing orders through a command-line user interface.
 
-### Objects
+## Objects
 
-#### Product
+### Product
 
 The Product class represents a specific type of product available in the store. It encapsulates information about the product, including its name and price.
 
 Additionally, the Product class includes an attribute to keep track of the total quantity of items of that product currently available in the store. When someone will purchase it, the amount will be modified accordingly.
 
-#####  Class Specification
+#### Class Specification
 
 | Instance variables | type  |
 |--------------------|:-----:|
@@ -24,7 +35,7 @@ Additionally, the Product class includes an attribute to keep track of the total
 | Active             | bool  |
 | Promotion          | class |
 
- #### Promotion
+ ### Promotion
 Products can have only one promotion at a given time.
 The current existing promotions are: 
 * Percentage discount
@@ -33,7 +44,7 @@ The current existing promotions are:
 
 Promotions are implemented in a way that allows us to add promotions to a product instance and remove them. We are also want to be able to add the same promotion to multiple products without repeating code.
 
-#### Store
+### Store
 The store class connects all the instances of Product together, allowing the user to make a purchase of multiple products at once.
 
 The Store class only contains one variable - a list of products that exist in the store. It exposes the following methods:
@@ -51,7 +62,7 @@ Buys the products and returns the total price of the order.
 
 - Python 3.x installed on your system. You can download Python from [python.org](https://www.python.org/downloads/).
 
-### Installation
+### Installation Steps
 
 1. Clone this repository or download the script file:
 
@@ -73,7 +84,7 @@ python main.py
 ### Usage
 [Watch Demo](https://www.youtube.com/watch?v=-f04Epudo7E)
 
-### Limits
+### Limitations
 
 * This tool does not have any database or any other kind of storage implemented, so all changes, such as stock changes or any other changes performed while running the program will be lost once you exit the program. 
 
