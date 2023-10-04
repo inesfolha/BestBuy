@@ -1,4 +1,11 @@
 # BestBuy
+<p id="top"></p>
+
+## Introduction
+Welcome to BestBuy, a simple engine for a fictional tech shop. 
+
+This project was developed as a training exercise for Object-Oriented Programming, Source Control, and Testing. BestBuy allows you to list products and simulate placing orders through a command-line user interface.
+
 
 ## Table of Contents
 1. [Introduction](#introduction)
@@ -9,13 +16,10 @@
 3. [Installation](#installation)
    - [Prerequisites](#prerequisites)
    - [Installation Steps](#installation-steps)
-4. [Usage](#usage)
+4. [How does it work?](#how-does-it-work?)
 5. [Limitations](#limitations)
+6. [Contributions](#contributions)
 
-## Introduction
-Welcome to BestBuy, a simple engine for a fictional tech shop. 
-
-This project was developed as a training exercise for Object-Oriented Programming, Source Control, and Testing. BestBuy allows you to list products and simulate placing orders through a command-line user interface.
 
 ## Objects
 
@@ -35,6 +39,7 @@ Additionally, the Product class includes an attribute to keep track of the total
 | Active             | bool  |
 | Promotion          | class |
 
+[Back to the Top](#top)
  ### Promotion
 Products can have only one promotion at a given time.
 The current existing promotions are: 
@@ -56,6 +61,7 @@ The Store class only contains one variable - a list of products that exist in th
 Product (Product class) and quantity (int).
 Buys the products and returns the total price of the order.
 
+[Back to the Top](#top)
 ## Installation
 
 ### Prerequisites
@@ -80,8 +86,9 @@ If you downloaded a ZIP archive, extract its contents to a directory of your cho
 ```bash
 python main.py
 ```
+[Back to the Top](#top)
 
-### Usage
+### How does it work?
 [Watch Demo](https://www.youtube.com/watch?v=-f04Epudo7E)
 
 ### Limitations
@@ -93,3 +100,10 @@ python main.py
 
 
 * To create new products or promotions, you need to do it directly in the script, there is no functionality implemented to do it through the command line interface. 
+
+[Back to the Top](#top)
+## Contributions
+
+Contributions to this project are welcome. If you'd like to contribute, please fork the repository, make your changes, and create a pull request.
+
+[Back to the Top](#top)
